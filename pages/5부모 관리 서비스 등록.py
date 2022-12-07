@@ -6,9 +6,13 @@ from time import strftime
 import time
 from pandas.core.reshape.tile import to_datetime
 import shelve
+import warnings
+warnings.filterwarnings('ignore')
 def main() :
   st.set_page_config(
     page_icon="👋",
     page_title="나만의 요리사",
     layout="wide")
   st.image('Banner.png')
+
+main()

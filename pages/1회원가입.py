@@ -6,6 +6,8 @@ from time import strftime
 import time
 from pandas.core.reshape.tile import to_datetime
 import shelve
+import warnings
+warnings.filterwarnings('ignore')
 
 def main() :
   st.set_page_config(
@@ -14,11 +16,13 @@ def main() :
     layout="wide")
 
   st.image('Banner.png')
+  st.header('실제 구현시, 회원정보 등록시 지문정보 저장')
+
   st.title('회원가입')
   st.subheader('※ 사용에 어려움이 있으시면 옆에 있는 직원에게 편하게 말씀해주십시오.')
 
   i_name = st.text_input('이름을 입력해주세요 :')
-  i_birth = st.date_input('생년월일을 입력해주세요 : (예시 601020')
+  i_birth = st.date_input('생년월일을 입력해주세요 :')
   sex_cat = ['여성', '남성']
   i_sex = st.multiselect('성별을 선택해주세요 :', sex_cat)
   dis_cat = ['당뇨', '고혈압', '관절염', '폐질환', '위염', '치매', '간질환', '소화기질환']
@@ -27,18 +31,23 @@ def main() :
   i_password = st.text_input('사용하실 비밀번호를 입력해주세요 :', type="password")
   i_password_check = st.text_input('다시 한번 입력해주세요:', type="password")
   if i_password == i_password_check:
-    pass
-  else: st.error("비밀번호가 일치하지 않습니다")
-  i_secure = pd.DataFrame({'name':[i_name], 'birth':[i_birth], 'password' : [i_password]})
-  i_data = pd.DataFrame({'name': [i_name], 'birth': [i_birth], 'sex': [i_sex], 'disease': [i_disease], 'phone_num':[i_number]})
-  i_data.set_index('name', inplace=True)
-  i_secure.set_index('name', inplace=True)
-  checkbox_btn = st.checkbox('입력완료')
-  if checkbox_btn :
-    i_data.to_csv(f'ID_DB/{i_name}{i_birth}.csv')
-    i_secure.to_csv(f'Secure_DB/{i_name}{i_birth}.csv')
-    st.success('가입이 완료되었습니다.')
-    time.sleep(2)
+    i_secure = pd.DataFrame({'name': [i_name], 'birth': [i_birth], 'password': [i_password]})
+    i_data = pd.DataFrame({'name': [i_name], 'birth': [i_birth], 'sex': [i_sex], 'disease': [i_disease], 'phone_num': [i_number], 'pay': [0]})
+    i_data.set_index('name', inplace=True)
+    i_secure.set_index('name', inplace=True)
+    checkbox_btn = st.checkbox('입력완료')
+    if checkbox_btn:
+      i_data.to_csv(f'ID_DB/{i_name}{i_birth}.csv')
+      i_secure.to_csv(f'Secure_DB/{i_name}{i_birth}.csv')
+      tm = localtime()
+      temp_time = strftime('%Y-%m-%d', tm)
+      df = pd.DataFrame({'측정일자' : [temp_time],'혈당(㎎/ℓ)' : [0],'혈압(수축기), mmHg' : [0],'혈압(이완기), mmHg' : [0]})
+      df.to_csv(f'Health_DB/{i_name}{i_birth}.csv')
+      st.success('가입이 완료되었습니다.')
+    else : pass
+  else : st.error("비밀번호가 일치하지 않습니다")
+
+
 
 
 main()

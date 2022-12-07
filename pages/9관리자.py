@@ -5,6 +5,8 @@ from time import localtime
 from time import strftime
 from pandas.core.reshape.tile import to_datetime
 import shelve
+import warnings
+warnings.filterwarnings('ignore')
 
 
 
