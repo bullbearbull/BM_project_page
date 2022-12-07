@@ -36,9 +36,9 @@ def main():
                 chart_bps = alt.Chart(health_data).mark_circle().encode(x='측정일자', y='혈압(수축기), mmHg')
                 chart_bpd = alt.Chart(health_data).mark_circle().encode(x='측정일자', y='혈압(이완기), mmHg')
 
-                st.altair_chart(chart_dia, use_container_width=True)
-                st.altair_chart(chart_bps, use_container_width=True)
-                st.altair_chart(chart_bpd, use_container_width=True)
+                st.altair_chart(chart_dia)
+                st.altair_chart(chart_bps)
+                st.altair_chart(chart_bpd)
 
 
             else: st.error('비밀번호가 일치하지 않습니다.')
