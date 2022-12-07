@@ -16,10 +16,9 @@ def main() :
     layout="wide")
 
   st.image('Banner.png')
-  st.header('실제 구현시, 회원정보 등록시 지문정보 저장')
 
   st.title('회원가입')
-  st.subheader('※ 사용에 어려움이 있으시면 옆에 있는 직원에게 편하게 말씀해주십시오.')
+  st.write('※ 사용에 어려움이 있으시면 직원에게 편하게 말씀해주십시오.')
 
   i_name = st.text_input('이름을 입력해주세요 :')
   i_birth = st.date_input('생년월일을 입력해주세요 :')

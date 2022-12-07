@@ -18,9 +18,6 @@ def main():
     st.image('Banner.png')
 
     st.header('건강정보 입력시스템')
-    st.header('실제 구현시, 회원정보는 지문으로 식별')
-
-    st.subheader('입력 대상의 정보를 확인하겠습니다.')
 
     i_name = st.text_input('이름을 입력해주세요 :')
     i_birth = st.date_input('생년월일을 입력해주세요 :')
