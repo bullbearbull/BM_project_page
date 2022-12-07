@@ -29,10 +29,11 @@ def main():
                 temp_time = strftime('%H:%M', tm)
                 df = pd.DataFrame({'입장일자':[temp_day], '입장시간':[temp_time], '퇴장시간':[''], '식사시간':[''], '식사량':[''], '기피':['']})
                 health_data = pd.read_csv(f'ID_DB/{i_name}{i_birth}.csv')
-                disease_list = health_data['disease'].to_list()
+                disease_list = health_data['disease'].to_string().replace('[', '').replace(']', '').replace("'", '').replace('0', '').replace(' ', '').split(',')
+
                 consider_list = []
                 for disease in disease_list:
-                    if disease == '고혈압' :
+                    if disease == '고혈압':
                         consider_list.append('저염식')
                     elif disease == '당뇨' :
                         consider_list.append('저당')
@@ -61,8 +62,11 @@ def main():
                         consider_list.append('저염')
                         consider_list.append('부드러움')
                     else : st.write(f'{disease}을 주의해주세요')
+                consider_list = set(consider_list)
                 st.subheader(f'입장시간 :{tm.tm_hour}시{tm.tm_min}분')
-                st.write(f'{i_name}님께 {consider_list}에 해당하는 음식으로 배식해주세요')
+                st.header(f'고객명 : {i_name}님')
+                st.header(f'{consider_list}')
+                st.header('으로 배식해주세요')
                 meal_data = pd.read_csv(f'Meal_DB/{i_name}{i_birth}.csv')
                 df = pd.concat([meal_data, df], axis=0, join='inner', ignore_index=True)
                 df.to_csv(f'Meal_DB/{i_name}{i_birth}.csv')
