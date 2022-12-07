@@ -23,15 +23,15 @@ def main() :
       if i_secure == i_password:
         st.header('종량제 식권 구매')
         st.write('서비스 소개 : 원하시는 때에 식사를 하실 수 있습니다!')
+        st.write('건강 측정 정보 열람 가능')
         st.write('이용기한 : 3개월')
         st.write('1회 이용권 : 7000원')
         st.write('10회 이용권 : 60000원')
-        st.write('30회 이용권 : 160000원')
+        st.write('30회 이용권 : 170000원')
 
         st.write('')
         st.header('기간제 식권 구매')
-        st.header('서비스 소개 : 식사를 포함해 정기적인 ')
-
+        st.subheader('서비스 소개 : 식사 제공 및 건강 데이터 종합 분석 후 월 1회 자녀에게 전송')
       else : st.error('비밀번호가 일치하지 않습니다.')
 
 
