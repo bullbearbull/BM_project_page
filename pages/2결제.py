@@ -21,17 +21,12 @@ def main() :
     checkbox_btn2 = st.checkbox('입력완료')
     if checkbox_btn2 :
       if i_secure == i_password:
-        st.header('종량제 식권 구매')
-        st.write('서비스 소개 : 원하시는 때에 식사를 하실 수 있습니다!')
-        st.write('건강 측정 정보 열람 가능')
-        st.write('이용기한 : 3개월')
-        st.write('1회 이용권 : 7000원')
-        st.write('10회 이용권 : 60000원')
-        st.write('30회 이용권 : 170000원')
+        image = st.image('BM_project_page/가입.png')
+        df_item = {'item_list' : ['1회권(종량제)', '10회권(종량제)', '30회권(종량제)', '1개월(기간제)', '3개월(기간제)', '6개월(기간제)', '12개월(기간제)'],
+                   'price_list' : ['6,000원', '55,000원', '150,000원', '150,000원', '400,000원', '750,000원', '1,400,000원']}
 
-        st.write('')
-        st.header('기간제 식권 구매')
-        st.subheader('서비스 소개 : 식사 제공 및 건강 데이터 종합 분석 후 월 1회 자녀에게 전송')
+        item = st.multiselect('가입하실 요금제를 선택해주세요', df_item.iloc[:, 'item_list'])
+        st.write(f'선택하신 요금제는 {item}으로, 금액은 {df_item.loc[(df_item.item_list == item),df_item.price_list]}입니다.')
       else : st.error('비밀번호가 일치하지 않습니다.')
 
 
