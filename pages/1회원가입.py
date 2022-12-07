@@ -31,7 +31,7 @@ def main() :
   i_password = st.text_input('사용하실 비밀번호를 입력해주세요 :', type="password")
   i_password_check = st.text_input('다시 한번 입력해주세요:', type="password")
   if i_password == i_password_check:
-    i_secure = pd.DataFrame({'name': [i_name], 'birth': [i_birth], 'password': [i_password]})
+    i_secure = pd.DataFrame({'name': [i_name], 'birth': [i_birth], 'password': [i_password], 'card_number':['']})
     i_data = pd.DataFrame({'name': [i_name], 'birth': [i_birth], 'sex': [i_sex], 'disease': [i_disease], 'phone_num': [i_number], 'pay': [0]})
     i_data.set_index('name', inplace=True)
     i_secure.set_index('name', inplace=True)
@@ -43,6 +43,8 @@ def main() :
       temp_time = strftime('%Y-%m-%d', tm)
       df = pd.DataFrame({'측정일자' : [temp_time],'혈당(㎎/ℓ)' : [0],'혈압(수축기), mmHg' : [0],'혈압(이완기), mmHg' : [0]})
       df.to_csv(f'Health_DB/{i_name}{i_birth}.csv')
+      df = pd.DataFrame({'입장일자':[0], '입장시간':[0], '퇴장시간':[0], '식사시간':[0], '식사량':[0], '기피':[0]})
+      df.to_csv(f'Meal_DB/{i_name}{i_birth}.csv')
       st.success('가입이 완료되었습니다.')
     else : pass
   else : st.error("비밀번호가 일치하지 않습니다")

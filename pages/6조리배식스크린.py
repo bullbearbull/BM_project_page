@@ -26,8 +26,8 @@ def main():
                 st.success('로그인되었습니다!')
                 tm = localtime()
                 temp_day = strftime('%Y-%m-%d', tm)
-                temp_time = strftime('%H:%m', tm)
-                df = pd.DataFrame({'입장일자':[temp_day], '입장시간':[temp_time], '퇴장시간':['미퇴장'], '식사시간':['미측정'], '식사량':['미입력']})
+                temp_time = strftime('%H:%M', tm)
+                df = pd.DataFrame({'입장일자':[temp_day], '입장시간':[temp_time], '퇴장시간':[''], '식사시간':[''], '식사량':[''], '기피':['']})
                 health_data = pd.read_csv(f'ID_DB/{i_name}{i_birth}.csv')
                 disease_list = health_data['disease'].to_list()
                 consider_list = []
@@ -61,8 +61,11 @@ def main():
                         consider_list.append('저염')
                         consider_list.append('부드러움')
                     else : st.write(f'{disease}을 주의해주세요')
-                st.subheader(f'입장시간 :{temp_time}')
-                st.header(f'{i_name}고객님께 {consider_list}에 해당하는 음식으로 배식해주세요')
+                st.subheader(f'입장시간 :{tm.tm_hour}시{tm.tm_min}분')
+                st.write(f'{i_name}님께 {consider_list}에 해당하는 음식으로 배식해주세요')
+                meal_data = pd.read_csv(f'Meal_DB/{i_name}{i_birth}.csv')
+                df = pd.concat([meal_data, df], axis=0, join='inner', ignore_index=True)
+                df.to_csv(f'Meal_DB/{i_name}{i_birth}.csv')
             else:st.error('비밀번호가 일치하지 않습니다.')
 
 
