@@ -21,7 +21,7 @@ def main() :
     checkbox_btn2 = st.checkbox('입력완료')
     if checkbox_btn2 :
       if i_secure == i_password:
-        image = st.image('BM_project_page/가입.png')
+        st.image('BM_project_page/가입.png')
         df_item = {'item_list' : ['1회권(종량제)', '10회권(종량제)', '30회권(종량제)', '1개월(기간제)', '3개월(기간제)', '6개월(기간제)', '12개월(기간제)'],
                    'price_list' : ['6,000원', '55,000원', '150,000원', '150,000원', '400,000원', '750,000원', '1,400,000원']}
 
